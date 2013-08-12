@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+{% block content %}
+
+  <script type="text/javascript">
+  	var stripe_key = "{{key}}"
+
+  	$(document).ready(function(){
+   
+  		// This identifies the website in the createToken call in js/global.js
+  		Stripe.setPublishableKey(stripe_key);
+
+  		// Comment out this line, if you don't want to auto-populate test data
+  		test_data.load()
+
+	});
+
+  </script>
+
+  <div id="new-customer">
+<!---->
+<form action="/charge" method="POST" id="payment-form" class="form-horizontal span6">
+	<legend>New Customers: Pay ${{amount_usd}} with Stripe</legend>
+
+    <span class="payment-errors"></span>
+ 
+ 	<div class="control-group">
+		<label class="control-label">Email</label>
+		<div class="controls">
+			<div class="row-fluid">
+				<div class="span7">
+					<input type="text" class="input-block-level" maxlength="20" data-stripe="email" name="email"/>
+				</div>
+			</div>
+      	</div>
+    </div>
+
+    <!---->
+    <div class="control-group">
+		<label class="control-label">Card Number</label>
+		<div class="controls">
+			<div class="row-fluid">
+				<div class="span7">
+					<!-- Not using name="" so that the data doesn't hit local server (only stripe)-->
+        			<input type="text" class="input-block-level" maxlength="20" data-stripe="number"/>
+      			</div>
+      		</div>	
+      </div>
+    </div>
+ 
+ 	<!---->
+    <div class="control-group">
+		<label class="control-label">CVC</label>
+		<div class="controls">
+			<div class="row-fluid">
+				<div class="span3">
+        			<input type="text" class="input-block-level" maxlength="3" data-stripe="cvc"/>
+    			</div>
+			</div>
+      	</div>
+    </div>
+ 
+ 	<!---->
+    <div class="control-group">
+		<label class="control-label">Expiration (MM/YYYY)</label>
+		<div class="controls">
+			<div class="row-fluid">
+				<div class="span3">
+					<input type="text" class="input-block-level" size="2" data-stripe="exp-month"/>
+    			</div>
+				<div class="span4">
+					<input type="text" class="input-block-level" size="4" data-stripe="exp-year"/>
+  				</div>
+			</div>
+  		</div>
+    </div>
+    <!---->
+
+    <div class="form-actions">
+    	<button type="submit" class="btn btn-primary">Submit Payment</button>
+	</div>
+
+</form>
+  <!--  End form 1  --> 
+</div>
+
+<div id="recurring-customer">
+
+	<form action="/recurring" method="POST" id="recurring-form" class="form-horizontal span6">
+		<legend>Recurring Customers: Pay ${{amount_usd}} with Stripe</legend>
+
+    	<div class="control-group">
+     		<label class="control-label">Email</label>
+     		<div class="controls">
+        		<input type="text" size="20" data-stripe="email" name="email"/>
+      		</div>
+    	</div>
+    
+    	<div class="form-actions">
+    		<button type="submit" class="btn btn-primary">Submit Payment</button>
+    	</div>
+	</form>
+  <!--  End form 2  --> 
+</div>
+
+{% endblock %}

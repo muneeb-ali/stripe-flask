@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+  {% if charge_valid %}
+  <h2>Thanks!</h2>
+  <p>You payed ${{amount_usd}} using account: </i>{{customer_email}}</i></p>
+  {% else %}
+  <h2>ERROR</h2> 
+  <p>Error <i>{{charge_msg}}</i> using account: <i>{{customer_email}}</i></p>
+  {% endif %}
+
+{% endblock %}
