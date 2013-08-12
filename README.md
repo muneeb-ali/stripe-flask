@@ -1,6 +1,6 @@
 # Stripe Flask
 
-A simple Python (Flask) app that interacts with the Stripe API (both Python and JavaScript) for making credit card payments. Users are identified by unique email addresses. New users are saved in a local MongoDB database and recurring charges can be made for saved users (only need to store the user email and Stripe ID for that customer).
+A simple Python (Flask) app that interacts with the Stripe API (both Python and JavaScript) for accepting credit card payments. Users are identified by unique email addresses. New users are saved in a local MongoDB database and recurring charges can be made for saved users (only need to store the user email and Stripe ID for that customer).
 
 ### How to Get Started
 
