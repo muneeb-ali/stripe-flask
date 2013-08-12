@@ -27,9 +27,9 @@ posts = db.posts
 @app.route('/')
 def index():
 	return render_template('index.html', 
-							key=stripe_keys['publishable_key'],
-							amount_usd=get_amount_usd()
-							)
+					key=stripe_keys['publishable_key'],
+					amount_usd=get_amount_usd()
+					)
 
 #-----------------------------------
 def get_amount_usd(amount=DEFAULT_CHARGE_AMOUNT):
@@ -58,15 +58,15 @@ def save_stripe_customer(customer_email, customer_id):
 
 #-----------------------------------
 def stripe_charge(customer_id,
-				charge_amount=DEFAULT_CHARGE_AMOUNT,
-				charge_descripton=DEFAULT_CHARGE_DESCRIPTION):
+			charge_amount=DEFAULT_CHARGE_AMOUNT,
+			charge_descripton=DEFAULT_CHARGE_DESCRIPTION):
 
 	try:		
 		charge = stripe.Charge.create(
-				customer=customer_id,
-				amount=charge_amount,
-				currency='usd',
-				description=charge_descripton 
+			customer=customer_id,
+			amount=charge_amount,
+			currency='usd',
+			description=charge_descripton 
 			)
 
 	except stripe.CardError as e:
@@ -90,9 +90,9 @@ def charge():
 	else:
 
 		customer = stripe.Customer.create(
-						email=customer_email,
-						card=request.form['stripeToken']
-						)
+					email=customer_email,
+					card=request.form['stripeToken']
+					)
 
 		customer_id = customer.id
 
@@ -103,10 +103,10 @@ def charge():
 	charge_valid, charge_msg = stripe_charge(customer_id)
 
 	return render_template('charge.html', 
-							amount_usd=get_amount_usd(), 
-							customer_email=customer_email,
-							charge_valid=charge_valid,
-							charge_msg=charge_msg)
+					amount_usd=get_amount_usd(), 
+					customer_email=customer_email,
+					charge_valid=charge_valid,
+					charge_msg=charge_msg)
 
 #-----------------------------------
 @app.route('/recurring', methods=['POST'])
@@ -128,10 +128,10 @@ def recurring():
 		charge_msg = "recurring customer doesn't exist"
 
 	return render_template('charge.html', 
-							amount_usd=get_amount_usd(), 
-							customer_email=customer_email,
-							charge_valid=charge_valid,
-							charge_msg=charge_msg)
+					amount_usd=get_amount_usd(), 
+					customer_email=customer_email,
+					charge_valid=charge_valid,
+					charge_msg=charge_msg)
 
 #-----------------------
 if __name__ == '__main__':
