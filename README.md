@@ -12,7 +12,7 @@ A simple Python (Flask) app that interacts with the Stripe API (both Python and 
 
 4. Make sure 'mongod' is installed and running - http://docs.mongodb.org/manual/installation/
 
-5. Get your Stripe API keys (https://manage.stripe.com/account/apikeys) and add PUBLISHABLE_KEY and SECRET_KEY to your .basrc file
+5. Get your Stripe API keys (https://manage.stripe.com/account/apikeys) and add PUBLISHABLE_KEY and SECRET_KEY to your .bashrc file
 ```
 export PUBLISHABLE_KEY=<your_publishable_key_from_stripe> 
 export SECRET_KEY=<your_secret_key_from_stripe>
